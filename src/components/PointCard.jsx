@@ -26,6 +26,9 @@ export function PointCard({ point, distance }) {
         {point.materials.slice(0, 5).map((material) => (
           <span key={material}>{materialLabels[material] || material}</span>
         ))}
+        {point.materials.length > 5 && (
+          <span className="tag-more">+{point.materials.length - 5}</span>
+        )}
       </div>
       <div className="card-actions">
         <a href={routeUrl(point)} target="_blank" rel="noreferrer">Google Maps</a>

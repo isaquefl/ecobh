@@ -17,6 +17,7 @@ export function MapView() {
   const [status, setStatus] = useState('Carregando dados públicos e fallback local...');
   const [locationRequested, setLocationRequested] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
   const mapRef = useRef(null);
   const layerRef = useRef([]);
 
@@ -40,6 +41,7 @@ export function MapView() {
       })
       .catch(() => {
         if (!active) return;
+        setHasError(true);
         setStatus('API externa indisponível. Exibindo base local demonstrativa.');
       })
       .finally(() => active && setIsLoading(false));
@@ -115,8 +117,10 @@ export function MapView() {
       const result = await searchAddress(search);
       setCenter({ lat: result.lat, lng: result.lng });
       setUserLocation({ lat: result.lat, lng: result.lng });
+      setHasError(false);
       setStatus(`Busca encontrada: ${result.label}`);
     } catch (error) {
+      setHasError(true);
       setStatus(error.message);
     }
   }
@@ -198,7 +202,13 @@ export function MapView() {
             </div>
           </div>
 
-          <p className={`map-status ${isLoading ? 'loading' : ''}`}>{status}</p>
+          <p
+            className={`map-status ${isLoading ? 'loading' : ''} ${hasError ? 'error' : ''}`}
+            role="status"
+            aria-live="polite"
+          >
+            {status}
+          </p>
         </aside>
 
         <div className="map-canvas-wrap">
@@ -207,15 +217,41 @@ export function MapView() {
       </div>
 
       <div className="results-header">
-        <h3>{filteredPoints.length} locais encontrados</h3>
+        <h3>{isLoading ? 'Carregando locais…' : `${filteredPoints.length} locais encontrados`}</h3>
         <p>Dados locais são demonstrativos e devem ser revisados antes de uso oficial.</p>
       </div>
 
-      <div className="points-grid">
-        {filteredPoints.map((point) => (
-          <PointCard key={point.id} point={point} distance={point.distance} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className="points-grid" aria-hidden="true">
+          {Array.from({ length: 6 }).map((_, index) => (
+            <article className="point-card skeleton-card" key={`skeleton-${index}`}>
+              <div className="skeleton-line skeleton-chip" />
+              <div className="skeleton-line skeleton-title" />
+              <div className="skeleton-line" />
+              <div className="skeleton-line short" />
+              <div className="skeleton-line skeleton-block" />
+              <div className="skeleton-tags">
+                <span /><span /><span />
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : filteredPoints.length === 0 ? (
+        <div className="empty-state" role="status">
+          <span className="empty-state-icon" aria-hidden="true">🗺️</span>
+          <h3>Nenhum ponto para este filtro</h3>
+          <p>Não encontramos locais para o material selecionado nesta área. Tente outro material ou pesquise por outro bairro.</p>
+          <button className="secondary-button" onClick={() => setActiveMaterial('all')}>
+            Mostrar todos os materiais
+          </button>
+        </div>
+      ) : (
+        <div className="points-grid">
+          {filteredPoints.map((point) => (
+            <PointCard key={point.id} point={point} distance={point.distance} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

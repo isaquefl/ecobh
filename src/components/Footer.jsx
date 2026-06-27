@@ -1,17 +1,36 @@
+const footerLinks = [
+  { id: 'mapa', label: 'Mapa interativo' },
+  { id: 'categorias', label: 'Guia de descarte' },
+  { id: 'educacao', label: 'Educação ambiental' },
+  { id: 'projeto', label: 'Sobre o projeto' },
+  { id: 'contato', label: 'Contribuir' }
+];
+
 export function Footer({ onNavigate }) {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="footer">
-      <div>
-        <strong>EcoBH</strong>
-        <p>Conectando pessoas ao descarte correto em Belo Horizonte.</p>
+      <div className="footer-brand">
+        <span className="footer-mark" aria-hidden="true">E</span>
+        <div>
+          <strong>EcoBH</strong>
+          <p>Conectando pessoas ao descarte correto em Belo Horizonte.</p>
+        </div>
       </div>
-      <div>
-        {['mapa', 'categorias', 'educacao', 'projeto', 'contato'].map((item) => (
-          <button key={item} onClick={() => onNavigate(item)}>
-            {item}
+
+      <nav className="footer-nav" aria-label="Links do rodapé">
+        <span className="footer-heading">Navegar</span>
+        {footerLinks.map((item) => (
+          <button key={item.id} onClick={() => onNavigate(item.id)}>
+            {item.label}
           </button>
         ))}
-      </div>
+      </nav>
+
+      <p className="footer-legal">
+        © {year} EcoBH · Projeto acadêmico Estácio · Dados demonstrativos
+      </p>
     </footer>
   );
 }
