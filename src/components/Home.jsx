@@ -17,11 +17,11 @@ export function Home({ onNavigate }) {
     <>
       <section className="hero" id="inicio">
         <div className="hero-copy">
-          <span className="eyebrow">EcoBH — Conectando pessoas ao descarte correto</span>
-          <h1>Encontre pontos de coleta e descarte corretamente em Belo Horizonte.</h1>
+          <span className="eyebrow">Descarte correto em Belo Horizonte</span>
+          <h1>Saiba <em>onde</em> e <em>como</em> descartar cada material.</h1>
           <p>
-            Uma plataforma web moderna para orientar moradores de BH sobre reciclagem, doação,
-            logística reversa e descarte responsável de materiais do dia a dia.
+            Um guia prático para moradores de BH: encontre o ponto de coleta mais próximo
+            e aprenda a separar recicláveis, eletrônicos, óleo e outros resíduos do dia a dia.
           </p>
 
           <div className="hero-actions">
