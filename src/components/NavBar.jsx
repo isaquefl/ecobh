@@ -3,7 +3,7 @@ const navItems = [
   { id: 'mapa', label: 'Mapa' },
   { id: 'categorias', label: 'Categorias' },
   { id: 'educacao', label: 'Educação' },
-  { id: 'projeto', label: 'Projeto' },
+  { id: 'projeto', label: 'Sobre' },
   { id: 'contato', label: 'Contribuir' }
 ];
 
@@ -14,7 +14,7 @@ export function NavBar({ activeView, onNavigate }) {
         <span className="brand-mark">E</span>
         <span>
           <strong>EcoBH</strong>
-          <small>Estácio | Sustentabilidade</small>
+          <small>Descarte correto · Belo Horizonte</small>
         </span>
       </button>
 

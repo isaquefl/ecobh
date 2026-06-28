@@ -1,15 +1,15 @@
 import { SectionTitle } from './SectionTitle';
 
 const stats = [
-  ['13', 'tipos de descarte mapeados'],
-  ['100%', 'sem chave privada no front-end'],
-  ['BH', 'foco em utilidade pública local']
+  ['13', 'tipos de material com guia de descarte'],
+  ['Tempo real', 'pontos do OpenStreetMap atualizados ao vivo'],
+  ['100% grátis', 'sem cadastro, sem custo, para qualquer pessoa']
 ];
 
 const benefits = [
-  ['Mapa inteligente', 'Busca por bairro, localização aproximada e rota para pontos de descarte.'],
-  ['Educação simples', 'Orientações rápidas para separar, armazenar e descartar cada material.'],
-  ['Impacto social', 'Projeto acadêmico com proposta prática para moradores, catadores e comunidade.']
+  ['Mapa de pontos reais', 'Busque por bairro, use sua localização e abra a rota direto no app de mapas.'],
+  ['Guia de descarte', 'Como separar, armazenar e onde levar cada material, sem complicação.'],
+  ['Feito com a comunidade', 'Você sugere pontos novos e correções; a gente revisa e coloca no mapa.']
 ];
 
 export function Home({ onNavigate }) {
@@ -29,7 +29,7 @@ export function Home({ onNavigate }) {
             <button className="secondary-button" onClick={() => onNavigate('categorias')}>Como descartar</button>
           </div>
 
-          <div className="hero-stats" aria-label="Indicadores do projeto">
+          <div className="hero-stats" aria-label="Destaques do EcoBH">
             {stats.map(([value, label]) => (
               <div key={label}>
                 <strong>{value}</strong>
@@ -55,8 +55,8 @@ export function Home({ onNavigate }) {
             </div>
           </div>
           <div className="impact-card">
-            <span>Impacto esperado</span>
-            <strong>menos descarte irregular, mais informação e participação comunitária.</strong>
+            <span>Por que importa</span>
+            <strong>menos descarte irregular, mais reciclagem e renda para quem cuida da cidade.</strong>
           </div>
         </div>
       </section>
@@ -100,9 +100,9 @@ export function Home({ onNavigate }) {
           align="center"
           eyebrow="A solução EcoBH"
           title="Tecnologia simples para uma cidade mais limpa."
-          description="O EcoBH combina mapa, dados públicos, fallback local e educação ambiental para transformar informação em ação cotidiana."
+          description="O EcoBH combina mapa, dados públicos em tempo real e educação ambiental para transformar informação em ação no dia a dia."
         />
-        <button className="primary-button" onClick={() => onNavigate('projeto')}>Ver proposta acadêmica</button>
+        <button className="primary-button" onClick={() => onNavigate('projeto')}>Conhecer o EcoBH</button>
       </section>
     </>
   );

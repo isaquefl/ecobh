@@ -22,8 +22,8 @@ const lessons = [
     text: 'Lâmpadas, baterias, medicamentos, óleo, eletrônicos, espelhos, porcelanas e móveis não devem ir automaticamente para a coleta comum.'
   },
   {
-    title: 'Tecnologia, sociedade e sustentabilidade',
-    text: 'Sistemas de Informação podem conectar dados públicos, mapas, usuários e instituições para resolver problemas urbanos com baixo custo e alto alcance.'
+    title: 'Pequenas ações, grande impacto',
+    text: 'Separar o lixo em casa, levar o óleo ao ponto certo e doar o que ainda serve já reduz poluição, gera renda para catadores e deixa a cidade mais limpa.'
   }
 ];
 
@@ -33,7 +33,7 @@ export function EducationPage() {
       <SectionTitle
         eyebrow="Educação ambiental"
         title="Informação clara para transformar hábito em impacto"
-        description="Conteúdo em linguagem direta para moradores, estudantes e comunidade acadêmica."
+        description="Conteúdo em linguagem direta para qualquer pessoa que queira descartar melhor no dia a dia."
       />
 
       <div className="lesson-grid">

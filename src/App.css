@@ -1154,6 +1154,78 @@ dd {
   background: var(--green-100);
 }
 
+.form-feedback.success {
+  color: var(--green-800);
+  background: var(--green-100);
+}
+
+.form-feedback.error {
+  color: #8a2018;
+  background: rgba(180, 35, 24, 0.09);
+}
+
+.form-feedback.info {
+  color: #1d4ed8;
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.optional {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.82rem;
+}
+
+/* Canais oficiais (barra lateral do mapa) */
+.official-box {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.filter-group-title {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.official-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.official-list a {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  text-decoration: none;
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.official-list a:hover {
+  border-color: var(--green-500);
+  background: var(--green-100);
+  transform: translateY(-1px);
+}
+
+.official-list strong {
+  color: var(--green-800);
+  font-size: 0.9rem;
+}
+
+.official-list span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
 /* ---------- Footer ---------- */
 .footer {
   display: grid;

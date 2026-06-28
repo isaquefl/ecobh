@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { materialOptions } from '../data/categories';
 import { localCollectionPoints } from '../data/collectionPoints';
+import { officialResources } from '../data/resources';
 import { fetchPublicCollectionPoints, searchAddress } from '../services/geoApi';
 import { distanceInKm, getBhCenter } from '../utils/geo';
 import { PointCard } from './PointCard';
@@ -14,7 +15,7 @@ export function MapView() {
   const [search, setSearch] = useState('');
   const [center, setCenter] = useState(getBhCenter());
   const [userLocation, setUserLocation] = useState(null);
-  const [status, setStatus] = useState('Carregando dados públicos e fallback local...');
+  const [status, setStatus] = useState('Carregando pontos de coleta de Belo Horizonte...');
   const [locationRequested, setLocationRequested] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -37,12 +38,16 @@ export function MapView() {
       .then((publicPoints) => {
         if (!active) return;
         setPoints(publicPoints);
-        setStatus('Dados públicos carregados com fallback local ativo.');
+        setStatus(
+          publicPoints.length
+            ? `${publicPoints.length} pontos públicos carregados do OpenStreetMap.`
+            : 'Nenhum ponto mapeado nesta área no momento. Use os canais oficiais abaixo.'
+        );
       })
       .catch(() => {
         if (!active) return;
         setHasError(true);
-        setStatus('API externa indisponível. Exibindo base local demonstrativa.');
+        setStatus('Não foi possível carregar os pontos agora. Use os canais oficiais listados abaixo.');
       })
       .finally(() => active && setIsLoading(false));
 
@@ -209,6 +214,20 @@ export function MapView() {
           >
             {status}
           </p>
+
+          <div className="official-box">
+            <span className="filter-group-title">Canais oficiais de BH</span>
+            <ul className="official-list">
+              {officialResources.map((resource) => (
+                <li key={resource.id}>
+                  <a href={resource.url} target="_blank" rel="noreferrer">
+                    <strong>{resource.name}</strong>
+                    <span>{resource.detail}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </aside>
 
         <div className="map-canvas-wrap">
@@ -218,7 +237,7 @@ export function MapView() {
 
       <div className="results-header">
         <h3>{isLoading ? 'Carregando locais…' : `${filteredPoints.length} locais encontrados`}</h3>
-        <p>Dados locais são demonstrativos e devem ser revisados antes de uso oficial.</p>
+        <p>Dados públicos do OpenStreetMap · confirme horários e materiais antes de ir.</p>
       </div>
 
       {isLoading ? (

@@ -1,44 +1,43 @@
 import { SectionTitle } from './SectionTitle';
 
 const blocks = [
-  ['Problema social identificado', 'Falta de acesso rápido a informações de descarte correto para materiais comuns e especiais em Belo Horizonte.'],
-  ['Demanda sociocomunitária', 'Moradores precisam de orientação simples, pontos próximos e rotas confiáveis para reduzir descarte irregular.'],
-  ['Objetivo do projeto', 'Criar uma plataforma acessível, responsiva e útil para conectar pessoas a pontos de coleta e conteúdo educativo.'],
-  ['Sistemas de Informação', 'O projeto usa dados, interfaces, geolocalização e integração com APIs públicas para apoiar decisões cotidianas.'],
-  ['Projeto de extensão Estácio', 'A proposta aproxima conhecimento acadêmico de uma necessidade real da comunidade, com foco em impacto social mensurável.'],
-  ['Melhorias futuras', 'Curadoria oficial de dados, painel administrativo, autenticação, avaliações, PWA e parcerias com cooperativas e prefeitura.']
+  ['O problema', 'Em Belo Horizonte, muita gente quer descartar corretamente eletrônicos, óleo, móveis e recicláveis — mas não sabe para onde ir. A informação existe, só está espalhada e difícil de achar.'],
+  ['O que o EcoBH faz', 'Reúne pontos de coleta reais num mapa só, organiza por tipo de material e mostra o que está mais perto de você, com rota direta para o seu app de mapas.'],
+  ['Dados reais e abertos', 'Os pontos vêm da base colaborativa do OpenStreetMap (Overpass API) e são complementados pelos canais oficiais da Prefeitura de BH. Nada de endereço inventado.'],
+  ['Feito pela comunidade', 'Qualquer pessoa pode sugerir um ponto novo ou uma correção. As sugestões são revisadas antes de entrar no mapa, mantendo a informação confiável.'],
+  ['Privacidade em primeiro lugar', 'A localização é usada só no seu navegador para calcular distâncias. Nenhuma chave sensível fica exposta no front-end.'],
+  ['Próximos passos', 'Parcerias com cooperativas e com a Prefeitura, avaliações de pontos, alertas de campanhas de coleta e versão instalável (PWA).']
 ];
 
 const stack = [
   'React',
   'Vite',
-  'JavaScript',
-  'CSS moderno',
   'Leaflet',
   'OpenStreetMap',
-  'Nominatim',
   'Overpass API',
+  'Nominatim',
+  'Supabase',
   'Geolocation API',
-  'Vercel ready',
-  'Dados locais fallback'
+  'Vercel'
 ];
 
 export function ProjectPage() {
   return (
     <section id="projeto">
       <SectionTitle
-        eyebrow="Sobre o projeto"
-        title="EcoBH como produto acadêmico, social e tecnológico"
-        description="Uma proposta de plataforma pública que demonstra como tecnologia pode resolver uma dor concreta da cidade."
+        eyebrow="Sobre o EcoBH"
+        title="Uma plataforma pública para uma cidade mais limpa"
+        description="O EcoBH nasceu para resolver uma dor concreta de quem mora em BH: descartar do jeito certo sem perder tempo procurando onde."
       />
 
       <div className="project-hero">
         <div>
-          <span>Estácio · Sistemas de Informação e Sociedade</span>
-          <h3>Da pesquisa acadêmica à demonstração funcional.</h3>
+          <span>Tecnologia a serviço da cidade</span>
+          <h3>Informação real, acessível e gratuita para todo mundo.</h3>
           <p>
-            O EcoBH foi estruturado para apresentação universitária, portfólio, GitHub e LinkedIn,
-            com linguagem profissional, arquitetura organizada e visual de produto real.
+            Mais do que um mapa, o EcoBH conecta moradores, cooperativas e poder público em
+            torno de um objetivo simples: facilitar o descarte correto e reduzir o lixo que vai
+            parar no lugar errado.
           </p>
         </div>
         <div className="stack-cloud">

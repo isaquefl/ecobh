@@ -2,7 +2,7 @@ const footerLinks = [
   { id: 'mapa', label: 'Mapa interativo' },
   { id: 'categorias', label: 'Guia de descarte' },
   { id: 'educacao', label: 'Educação ambiental' },
-  { id: 'projeto', label: 'Sobre o projeto' },
+  { id: 'projeto', label: 'Sobre o EcoBH' },
   { id: 'contato', label: 'Contribuir' }
 ];
 
@@ -29,7 +29,7 @@ export function Footer({ onNavigate }) {
       </nav>
 
       <p className="footer-legal">
-        © {year} EcoBH · Projeto acadêmico Estácio · Dados demonstrativos
+        © {year} EcoBH · Dados de pontos via OpenStreetMap · Feito em Belo Horizonte 💚
       </p>
     </footer>
   );

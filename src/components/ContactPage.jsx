@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { materialOptions } from '../data/categories';
+import { submitSuggestion } from '../services/suggestions';
 import { SectionTitle } from './SectionTitle';
 
 const initialForm = {
@@ -13,24 +14,40 @@ const initialForm = {
 export function ContactPage() {
   const [form, setForm] = useState(initialForm);
   const [feedback, setFeedback] = useState('');
+  const [feedbackType, setFeedbackType] = useState('info');
   const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   function updateField(field, value) {
     setForm((current) => ({ ...current, [field]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const nextErrors = validate(form);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length) {
+      setFeedbackType('error');
       setFeedback('Revise os campos destacados antes de enviar.');
       return;
     }
 
-    setFeedback('Sugestão registrada localmente para demonstração. Em produção, este formulário seria conectado a um backend seguro.');
-    setForm(initialForm);
+    setSubmitting(true);
+    setFeedbackType('info');
+    setFeedback('Enviando sua sugestão...');
+
+    try {
+      await submitSuggestion(form);
+      setFeedbackType('success');
+      setFeedback('Sugestão enviada com sucesso! Nossa equipe vai revisar e, se confirmada, ela aparece no mapa. Obrigado por contribuir. 💚');
+      setForm(initialForm);
+    } catch (error) {
+      setFeedbackType('error');
+      setFeedback(error.message || 'Não foi possível enviar agora. Tente novamente em instantes.');
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -38,7 +55,7 @@ export function ContactPage() {
       <SectionTitle
         eyebrow="Contribuição"
         title="Sugira pontos de coleta, correções ou parcerias"
-        description="O formulário é visual e simulado nesta versão, sem coleta real em servidor e sem exposição de chaves sensíveis."
+        description="Conhece um ponto que não está no mapa? Envie abaixo. Cada sugestão é revisada pela nossa equipe antes de entrar na plataforma."
       />
 
       <form className="contact-form" onSubmit={handleSubmit} noValidate>
@@ -54,7 +71,7 @@ export function ContactPage() {
             {errors.name && <small>{errors.name}</small>}
           </label>
           <label>
-            E-mail
+            E-mail <span className="optional">(opcional)</span>
             <input
               type="email"
               value={form.email}
@@ -99,8 +116,10 @@ export function ContactPage() {
           {errors.message && <small>{errors.message}</small>}
         </label>
 
-        <button className="primary-button" type="submit">Enviar sugestão</button>
-        {feedback && <p className="form-feedback">{feedback}</p>}
+        <button className="primary-button" type="submit" disabled={submitting}>
+          {submitting ? 'Enviando…' : 'Enviar sugestão'}
+        </button>
+        {feedback && <p className={`form-feedback ${feedbackType}`}>{feedback}</p>}
       </form>
     </section>
   );
@@ -109,7 +128,8 @@ export function ContactPage() {
 function validate(form) {
   const errors = {};
   if (form.name.trim().length < 2) errors.name = 'Informe pelo menos 2 caracteres.';
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Digite um e-mail válido.';
+  // E-mail é opcional, mas se preenchido precisa ser válido.
+  if (form.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Digite um e-mail válido.';
   if (form.place.trim().length < 4) errors.place = 'Informe o local com mais detalhes.';
   if (form.message.trim().length < 10) errors.message = 'Descreva a sugestão em pelo menos 10 caracteres.';
   return errors;
