@@ -29,7 +29,7 @@ function App() {
 
   useEffect(() => {
     const animatedItems = document.querySelectorAll(
-      '.section-title, .hero-copy > *, .hero-product, .benefit-strip article, .problem-grid article, .solution-band, .map-sidebar, .map-canvas-wrap, .results-header, .point-card, .category-card, .lesson-card, .project-hero, .project-grid article, .contact-form'
+      '.section-title, .hero-copy > *, .hero-product, .benefit-strip article, .steps-grid .step-card, .problem-grid article, .solution-band, .map-sidebar, .map-canvas-wrap, .results-header, .point-card, .category-card, .lesson-card, .project-hero, .project-grid article, .contact-form'
     );
 
     animatedItems.forEach((item, index) => {

@@ -71,6 +71,32 @@ export function Home({ onNavigate }) {
         ))}
       </section>
 
+      <section className="steps-section">
+        <SectionTitle
+          align="center"
+          eyebrow="Como funciona"
+          title="Descarte certo em 3 passos"
+          description="Sem cadastro e sem complicação — do celular ou do computador."
+        />
+        <div className="steps-grid">
+          <article className="step-card">
+            <span className="step-num">1</span>
+            <h3>Busque</h3>
+            <p>Use sua localização ou pesquise por bairro para ver os pontos de coleta perto de você.</p>
+          </article>
+          <article className="step-card">
+            <span className="step-num">2</span>
+            <h3>Filtre o material</h3>
+            <p>Escolha o que vai descartar — eletrônico, óleo, vidro, roupas — e veja só os locais que aceitam.</p>
+          </article>
+          <article className="step-card">
+            <span className="step-num">3</span>
+            <h3>Vá com a rota pronta</h3>
+            <p>Abra a rota direto no Google Maps ou OpenStreetMap e leve seu material ao lugar certo.</p>
+          </article>
+        </div>
+      </section>
+
       <section className="split-section">
         <div>
           <SectionTitle

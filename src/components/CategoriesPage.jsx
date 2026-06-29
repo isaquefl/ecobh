@@ -1,6 +1,22 @@
 import { categories } from '../data/categories';
 import { SectionTitle } from './SectionTitle';
 
+const categoryIcons = {
+  eletronico: '💻',
+  moveis: '🛋️',
+  ferro: '🔩',
+  latinha: '🥫',
+  papelao: '📦',
+  plastico: '🧴',
+  vidro: '🍾',
+  oleo: '🛢️',
+  pilhas: '🔋',
+  baterias: '⚡',
+  roupas: '👕',
+  'bota-fora': '🚛',
+  'coleta-seletiva': '♻️'
+};
+
 export function CategoriesPage() {
   return (
     <section id="categorias">
@@ -13,6 +29,7 @@ export function CategoriesPage() {
       <div className="category-cards">
         {categories.map((category) => (
           <article className="category-card" key={category.id}>
+            <span className="category-icon" aria-hidden="true">{categoryIcons[category.id] || '♻️'}</span>
             <span>{category.name}</span>
             <p>{category.short}</p>
             <dl>
